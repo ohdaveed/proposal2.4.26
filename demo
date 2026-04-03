@@ -19,7 +19,15 @@ import {
   Home,
   FileCheck,
   BookOpen,
-  Flag
+  Flag,
+  TrendingUp,
+  Globe,
+  Clock,
+  ChevronRight,
+  Layers,
+  Star,
+  ThumbsUp,
+  ThumbsDown
 } from 'lucide-react';
 
 const App = () => {
@@ -56,20 +64,46 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100">
+      {/* SF.gov Top Utility Bar */}
+      <div className="bg-[#1C3E57] text-white">
+        <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            {/* SF Seal SVG */}
+            <svg className="w-6 h-6 opacity-90" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="19" stroke="white" strokeWidth="1.5"/>
+              <circle cx="20" cy="20" r="14" stroke="white" strokeWidth="1"/>
+              <path d="M20 8 L22 16 L20 14 L18 16 Z" fill="white"/>
+              <path d="M20 32 L18 24 L20 26 L22 24 Z" fill="white"/>
+              <path d="M8 20 L16 18 L14 20 L16 22 Z" fill="white"/>
+              <path d="M32 20 L24 22 L26 20 L24 18 Z" fill="white"/>
+              <circle cx="20" cy="20" r="3" fill="white"/>
+            </svg>
+            <span className="text-xs font-semibold tracking-wide text-slate-200">City and County of San Francisco</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <a href="#" className="text-xs text-slate-300 hover:text-white flex items-center gap-1 transition-colors">
+              <Globe size={12}/> SF.gov
+            </a>
+            <a href="#" className="text-xs text-slate-300 hover:text-white transition-colors">311</a>
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Final Draft</span>
-              <span className="text-slate-400 text-xs font-medium">April 3, 2026</span>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="bg-blue-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Final Draft</span>
+              <span className="text-slate-400 text-xs font-medium flex items-center gap-1"><Clock size={11}/> April 3, 2026</span>
             </div>
-            <h1 className="text-xl font-black text-slate-800 tracking-tight">Healthy Housing & Vector Control</h1>
-            <p className="text-sm text-slate-500 font-medium">Content Audit and Consolidation Report</p>
+            <h1 className="text-xl font-black text-slate-800 tracking-tight">Healthy Housing &amp; Vector Control</h1>
+            <p className="text-sm text-slate-500 font-medium">Content Audit and Consolidation Report · SF DPH</p>
           </div>
           <div className="text-right hidden md:block">
-            <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Prepared by</p>
+            <p className="text-[10px] text-slate-400 uppercase tracking-wider font-bold mb-0.5">Prepared by</p>
             <p className="text-sm font-bold text-slate-700">David Arrizon</p>
+            <p className="text-xs text-slate-400">Digital Content Strategist</p>
           </div>
         </div>
       </header>
@@ -83,27 +117,30 @@ const App = () => {
             role="tablist"
             aria-label="Report Sections"
           >
+            {/* Section label for desktop */}
+            <p className="hidden lg:block text-[10px] font-bold text-slate-400 uppercase tracking-widest px-1 mb-1">Report Sections</p>
             {[
-              { id: 'executive', label: 'Executive Summary', icon: <FileText size={18}/> },
-              { id: 'diagnosis', label: 'Content Diagnosis', icon: <Search size={18}/> },
-              { id: 'gold-standard', label: 'Gold Standard Model', icon: <CheckCircle size={18}/> },
-              { id: 'architecture', label: 'Target Architecture', icon: <Layout size={18}/> },
-              { id: 'standards', label: 'Karl Editorial Standards', icon: <BookOpen size={18}/> },
-              { id: 'roadmap', label: 'Implementation Plan', icon: <Map size={18}/> },
-              { id: 'decisions', label: 'Decision Points', icon: <ClipboardCheck size={18}/> },
-              { id: 'recommendation', label: 'Final Recommendation', icon: <Flag size={18}/> },
+              { id: 'executive', label: 'Executive Summary', icon: <FileText size={16}/>, num: '01' },
+              { id: 'diagnosis', label: 'Content Diagnosis', icon: <Search size={16}/>, num: '02' },
+              { id: 'gold-standard', label: 'Gold Standard Model', icon: <Star size={16}/>, num: '03' },
+              { id: 'architecture', label: 'Target Architecture', icon: <Layers size={16}/>, num: '04' },
+              { id: 'standards', label: 'Karl Editorial Standards', icon: <BookOpen size={16}/>, num: '05' },
+              { id: 'roadmap', label: 'Implementation Plan', icon: <Map size={16}/>, num: '06' },
+              { id: 'decisions', label: 'Decision Points', icon: <ClipboardCheck size={16}/>, num: '07' },
+              { id: 'recommendation', label: 'Final Recommendation', icon: <Flag size={16}/>, num: '08' },
             ].map((item) => (
               <button
                 key={item.id}
                 role="tab"
                 aria-selected={activeTab === item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`flex-shrink-0 w-auto lg:w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                className={`flex-shrink-0 w-auto lg:w-full flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                   activeTab === item.id 
-                    ? 'bg-blue-600 text-white shadow-md lg:transform lg:scale-[1.02]' 
-                    : 'text-slate-600 bg-white lg:bg-transparent hover:bg-white hover:text-blue-600 shadow-sm lg:shadow-none border border-slate-200 lg:border-transparent'
+                    ? 'bg-[#1C3E57] text-white shadow-md' 
+                    : 'text-slate-600 bg-white lg:bg-transparent hover:bg-white hover:text-[#1C3E57] shadow-sm lg:shadow-none border border-slate-200 lg:border-transparent'
                 }`}
               >
+                <span className={`hidden lg:flex items-center justify-center w-5 text-[10px] font-bold flex-shrink-0 ${activeTab === item.id ? 'text-blue-200' : 'text-slate-400'}`}>{item.num}</span>
                 {item.icon}
                 <span className="whitespace-nowrap">{item.label}</span>
               </button>
@@ -116,29 +153,58 @@ const App = () => {
               
               {/* Executive Summary */}
               {activeTab === 'executive' && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <h2 className="text-2xl font-black text-slate-800 mb-6">Executive Summary</h2>
-                  <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-8">
-                    <p className="text-blue-900 leading-relaxed italic text-lg">
-                      "The current HHVC web content is strong in subject matter depth but weak in structure, navigation, and task completion. We will consolidate around a smaller, clearer page set using the rodent redesign as our gold standard."
-                    </p>
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  {/* Section breadcrumb */}
+                  <div className="bg-slate-50 border-b border-slate-200 px-8 py-3 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="font-semibold text-slate-400">SF DPH</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-slate-400">HHVC Audit</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-[#1C3E57]">Executive Summary</span>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
-                      <h3 className="font-bold text-slate-800 border-b pb-2 flex items-center gap-2">
-                        <AlertCircle className="text-amber-500" size={18} /> Primary Diagnosis
-                      </h3>
-                      <p className="text-slate-600 text-sm leading-relaxed">
-                        Content is fragmented across overlapping pages, creating decision friction for residents and property owners. The topic hub reflects internal program categories more than public needs.
+
+                  <div className="p-8">
+                    <h2 className="text-2xl font-black text-slate-800 mb-2">Executive Summary</h2>
+                    <p className="text-slate-500 text-sm mb-6">Audit scope: sf.gov Healthy Housing &amp; Vector Control web section · April 2026</p>
+                    
+                    {/* Key Metrics */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                      {[
+                        { value: '14', label: 'Pages Audited', icon: <FileText size={16}/>, color: 'blue' },
+                        { value: '4', label: 'Critical Findings', icon: <AlertCircle size={16}/>, color: 'red' },
+                        { value: '5', label: 'Target Pages', icon: <TrendingUp size={16}/>, color: 'emerald' },
+                        { value: '4', label: 'Implementation Phases', icon: <Clock size={16}/>, color: 'amber' },
+                      ].map((stat, i) => (
+                        <div key={i} className={`bg-${stat.color}-50 border border-${stat.color}-100 rounded-xl p-4 flex flex-col items-center text-center`}>
+                          <div className={`text-${stat.color}-600 mb-2`}>{stat.icon}</div>
+                          <div className={`text-3xl font-black text-${stat.color}-700 leading-none`}>{stat.value}</div>
+                          <div className={`text-[11px] font-semibold text-${stat.color}-600 mt-1 leading-tight`}>{stat.label}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="bg-[#1C3E57] border-l-4 border-blue-400 p-6 rounded-r-lg mb-8">
+                      <p className="text-blue-100 leading-relaxed italic text-lg">
+                        "The current HHVC web content is strong in subject matter depth but weak in structure, navigation, and task completion. We will consolidate around a smaller, clearer page set using the rodent redesign as our gold standard."
                       </p>
                     </div>
-                    <div className="space-y-4">
-                      <h3 className="font-bold text-slate-800 border-b pb-2 flex items-center gap-2">
-                        <CheckCircle className="text-emerald-500" size={18} /> Strategic Goal
-                      </h3>
-                      <p className="text-slate-600 text-sm leading-relaxed">
-                        Adopt a resident-centered service sequence: recognize the problem, report it, understand the inspection process, and learn how to fix or prevent issues.
-                      </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-4 bg-amber-50 border border-amber-100 rounded-xl p-5">
+                        <h3 className="font-bold text-slate-800 border-b border-amber-200 pb-2 flex items-center gap-2">
+                          <AlertCircle className="text-amber-500" size={18} /> Primary Diagnosis
+                        </h3>
+                        <p className="text-slate-600 text-sm leading-relaxed">
+                          Content is fragmented across overlapping pages, creating decision friction for residents and property owners. The topic hub reflects internal program categories more than public needs.
+                        </p>
+                      </div>
+                      <div className="space-y-4 bg-emerald-50 border border-emerald-100 rounded-xl p-5">
+                        <h3 className="font-bold text-slate-800 border-b border-emerald-200 pb-2 flex items-center gap-2">
+                          <CheckCircle className="text-emerald-500" size={18} /> Strategic Goal
+                        </h3>
+                        <p className="text-slate-600 text-sm leading-relaxed">
+                          Adopt a resident-centered service sequence: recognize the problem, report it, understand the inspection process, and learn how to fix or prevent issues.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -146,8 +212,16 @@ const App = () => {
 
               {/* Content Diagnosis */}
               {activeTab === 'diagnosis' && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <h2 className="text-2xl font-black text-slate-800 mb-6">Audit Findings & Current State</h2>
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="bg-slate-50 border-b border-slate-200 px-8 py-3 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="font-semibold text-slate-400">SF DPH</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-slate-400">HHVC Audit</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-[#1C3E57]">Content Diagnosis</span>
+                  </div>
+                  <div className="p-8">
+                  <h2 className="text-2xl font-black text-slate-800 mb-6">Audit Findings &amp; Current State</h2>
                   
                   {/* Visual Diagram: Before vs After */}
                   <div className="mb-10 bg-slate-50 p-6 rounded-xl border border-slate-200">
@@ -231,12 +305,21 @@ const App = () => {
                       description="The inspection page doesn't set expectations about scope, process, or legal outcomes." 
                     />
                   </div>
+                  </div>
                 </div>
               )}
 
               {/* Gold Standard Model */}
               {activeTab === 'gold-standard' && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="bg-slate-50 border-b border-slate-200 px-8 py-3 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="font-semibold text-slate-400">SF DPH</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-slate-400">HHVC Audit</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-[#1C3E57]">Gold Standard Model</span>
+                  </div>
+                  <div className="p-8">
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
                     <div>
                       <h2 className="text-2xl font-black text-slate-800">The "Gold Standard" Mockup</h2>
@@ -276,11 +359,38 @@ const App = () => {
                     </div>
 
                     {/* SF.gov Style Header */}
-                    <div className="bg-[#1C3E57] text-white p-4 md:px-8 flex flex-col md:flex-row md:items-center justify-between border-b-4 border-blue-400">
-                      <div className="flex items-center gap-3 mb-2 md:mb-0">
-                        <div className="font-black text-2xl tracking-tighter">SF.gov</div>
+                    <div className="bg-[#1C3E57] text-white">
+                      <div className="px-4 py-1.5 flex items-center justify-between border-b border-white/10">
+                        <div className="flex items-center gap-2 text-[10px] text-slate-300">
+                          <svg className="w-3.5 h-3.5 opacity-80" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="white" strokeWidth="1.5"/><circle cx="20" cy="20" r="3" fill="white"/></svg>
+                          City and County of San Francisco
+                        </div>
+                        <div className="flex gap-3 text-[10px] text-slate-300">
+                          <span className="cursor-pointer hover:text-white transition-colors flex items-center gap-1"><Globe size={9}/> Translate</span>
+                          <span className="cursor-pointer hover:text-white transition-colors">311</span>
+                        </div>
                       </div>
-                      <div className="text-sm font-medium text-slate-200">City and County of San Francisco</div>
+                      <div className="p-4 md:px-8 flex flex-col md:flex-row md:items-center justify-between border-b-2 border-blue-500/50">
+                        <div className="flex items-center gap-3 mb-2 md:mb-0">
+                          <div className="font-black text-2xl tracking-tighter">SF<span className="text-blue-300">.</span>gov</div>
+                        </div>
+                        <div className="hidden md:flex items-center gap-6 text-sm text-slate-200">
+                          <span className="cursor-pointer hover:text-white">Residents</span>
+                          <span className="cursor-pointer hover:text-white">Business</span>
+                          <span className="cursor-pointer hover:text-white">Departments</span>
+                          <span className="bg-white/10 border border-white/20 text-white px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-white/20 flex items-center gap-1.5"><Search size={10}/> Search</span>
+                        </div>
+                      </div>
+                      {/* Breadcrumb inside mockup */}
+                      <div className="px-4 md:px-8 py-2 flex items-center gap-1.5 text-[10px] text-slate-300 border-b border-white/10 bg-black/10">
+                        <span className="hover:text-white cursor-pointer">Home</span>
+                        <ChevronRight size={9}/>
+                        <span className="hover:text-white cursor-pointer">Health</span>
+                        <ChevronRight size={9}/>
+                        <span className="hover:text-white cursor-pointer">Healthy Housing</span>
+                        <ChevronRight size={9}/>
+                        <span className="text-white">Report rodents</span>
+                      </div>
                     </div>
 
                     {/* Page Content Wireframe - Karl Principles Applied */}
@@ -367,14 +477,46 @@ const App = () => {
                   </div>
                   
                   <p className="text-center text-xs text-slate-500 mt-6 italic">Hover over sections to see Karl editorial principles applied (Plain language, Task-first, Max bullets, etc.)</p>
+                  </div>
                 </div>
               )}
 
               {/* Architecture */}
               {activeTab === 'architecture' && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="bg-slate-50 border-b border-slate-200 px-8 py-3 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="font-semibold text-slate-400">SF DPH</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-slate-400">HHVC Audit</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-[#1C3E57]">Target Architecture</span>
+                  </div>
+                  <div className="p-8">
                   <h2 className="text-2xl font-black text-slate-800 mb-2">Target Architecture Flow</h2>
                   <p className="text-slate-600 mb-8">Consolidating from a fragmented set to 5 primary task-based pages.</p>
+                  
+                  {/* Resident Journey Strip */}
+                  <div className="mb-8 bg-blue-50 border border-blue-100 rounded-xl p-5">
+                    <p className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-3">Resident Journey</p>
+                    <div className="flex items-center gap-0 overflow-x-auto">
+                      {[
+                        { step: '1', label: 'Recognize', sub: 'Signs of problem' },
+                        { step: '2', label: 'Report', sub: 'File a complaint' },
+                        { step: '3', label: 'Inspect', sub: 'Understand process' },
+                        { step: '4', label: 'Fix', sub: 'Take action' },
+                        { step: '5', label: 'Prevent', sub: 'Long-term steps' },
+                      ].map((j, i, arr) => (
+                        <React.Fragment key={i}>
+                          <div className="flex-shrink-0 text-center px-3">
+                            <div className="w-8 h-8 bg-[#1C3E57] text-white rounded-full flex items-center justify-center text-xs font-bold mx-auto mb-1">{j.step}</div>
+                            <div className="text-xs font-bold text-slate-700">{j.label}</div>
+                            <div className="text-[10px] text-slate-500">{j.sub}</div>
+                          </div>
+                          {i < arr.length - 1 && <div className="flex-1 min-w-[20px] h-0.5 bg-blue-200 flex-shrink-0"></div>}
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </div>
                   
                   {/* Visual Sitemap Tree */}
                   <div className="mb-10 p-6 bg-slate-50 border border-slate-200 rounded-xl overflow-x-auto">
@@ -449,12 +591,21 @@ const App = () => {
                       </div>
                     </div>
                   </div>
+                  </div>
                 </div>
               )}
 
               {/* Karl Editorial Standards */}
               {activeTab === 'standards' && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="bg-slate-50 border-b border-slate-200 px-8 py-3 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="font-semibold text-slate-400">SF DPH</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-slate-400">HHVC Audit</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-[#1C3E57]">Karl Editorial Standards</span>
+                  </div>
+                  <div className="p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <BookOpen className="text-blue-600" size={28} />
                     <div>
@@ -522,14 +673,76 @@ const App = () => {
                       </div>
                     </div>
                   </div>
+
+                  {/* Before / After Content Transformation */}
+                  <div className="mt-8 border border-slate-200 rounded-xl overflow-hidden">
+                    <div className="bg-slate-100 border-b border-slate-200 px-5 py-3 flex items-center gap-2">
+                      <GitMerge size={16} className="text-slate-600"/>
+                      <span className="text-sm font-bold text-slate-700">Plain Language in Practice: Before &amp; After</span>
+                    </div>
+                    <div className="divide-y divide-slate-100">
+                      {[
+                        {
+                          before: "The SFDPH Vector Control Program requests that residents utilize the online service request portal to facilitate the expeditious remediation of rodent infestations.",
+                          after: "Report a rodent problem online. We will respond within 3 business days.",
+                          principle: "Plain language + Task-first"
+                        },
+                        {
+                          before: "Welcome to the Healthy Housing page. This page contains information about various health and housing related topics.",
+                          after: "Fix a housing health problem in your home or building.",
+                          principle: "No 'Welcome to' + Action headline"
+                        },
+                        {
+                          before: "Please click here to access relevant documentation, i.e. inspection forms, etc.",
+                          after: "Download inspection forms and multilingual guides.",
+                          principle: "No 'click here' + No latin abbreviations"
+                        },
+                      ].map((ex, i) => (
+                        <div key={i} className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                          <div className="p-4 bg-red-50/40">
+                            <div className="flex items-center gap-1.5 mb-2">
+                              <ThumbsDown size={12} className="text-red-400"/>
+                              <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">Before</span>
+                            </div>
+                            <p className="text-sm text-slate-600 italic leading-relaxed">{ex.before}</p>
+                          </div>
+                          <div className="p-4 bg-emerald-50/40">
+                            <div className="flex items-center gap-1.5 mb-2">
+                              <ThumbsUp size={12} className="text-emerald-500"/>
+                              <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-wider">After</span>
+                              <span className="ml-auto text-[10px] text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full font-semibold">{ex.principle}</span>
+                            </div>
+                            <p className="text-sm font-semibold text-slate-800 leading-relaxed">{ex.after}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  </div>
                 </div>
               )}
 
               {/* Roadmap */}
               {activeTab === 'roadmap' && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <h2 className="text-2xl font-black text-slate-800 mb-8">Implementation Roadmap</h2>
-                  <div className="max-w-2xl bg-white p-2">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="bg-slate-50 border-b border-slate-200 px-8 py-3 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="font-semibold text-slate-400">SF DPH</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-slate-400">HHVC Audit</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-[#1C3E57]">Implementation Plan</span>
+                  </div>
+                  <div className="p-8">
+                  <h2 className="text-2xl font-black text-slate-800 mb-2">Implementation Roadmap</h2>
+                  <p className="text-slate-500 text-sm mb-8">4 phases over 90+ days to consolidate, rebuild, and optimize HHVC content.</p>
+                  
+                  {/* Progress bar */}
+                  <div className="bg-slate-100 rounded-full h-2 mb-8 overflow-hidden">
+                    <div className="bg-gradient-to-r from-[#1C3E57] to-blue-400 h-full w-1/4 rounded-full"></div>
+                  </div>
+                  <p className="text-xs text-slate-500 -mt-6 mb-8 text-right">Phase 1 in progress</p>
+
+                  <div className="max-w-2xl">
                     <RoadmapPhase 
                       phase="1" 
                       title="Stabilize" 
@@ -555,29 +768,39 @@ const App = () => {
                       tasks="Refine internal linking and SEO. Align labels to user intent and reduce self-competition." 
                     />
                   </div>
+                  </div>
                 </div>
               )}
 
               {/* Decision Points */}
               {activeTab === 'decisions' && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <h2 className="text-2xl font-black text-slate-800 mb-6">Leadership Decision Points</h2>
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="bg-slate-50 border-b border-slate-200 px-8 py-3 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="font-semibold text-slate-400">SF DPH</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-slate-400">HHVC Audit</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-[#1C3E57]">Decision Points</span>
+                  </div>
+                  <div className="p-8">
+                  <h2 className="text-2xl font-black text-slate-800 mb-2">Leadership Decision Points</h2>
+                  <p className="text-slate-500 text-sm mb-6">Select each item to mark as approved.</p>
                   <div className="space-y-4 max-w-3xl">
                     {[
-                      "Approve rodent page structure as the standard for all new guidance.",
-                      "Approve consolidation toward task-based architecture vs. adding pages.",
-                      "Approve content cleanup focused on broken labels and dead ends.",
-                      "Approve development of a 'Reviewed/Current' tagging system for files.",
-                      "Approve expansion of the Inspection Programs page for transparency."
-                    ].map((text, index) => {
+                      { text: "Approve rodent page structure as the standard for all new guidance.", owner: "Content Lead" },
+                      { text: "Approve consolidation toward task-based architecture vs. adding pages.", owner: "Program Director" },
+                      { text: "Approve content cleanup focused on broken labels and dead ends.", owner: "Web Team" },
+                      { text: "Approve development of a 'Reviewed/Current' tagging system for files.", owner: "Content Lead" },
+                      { text: "Approve expansion of the Inspection Programs page for transparency.", owner: "Program Director" },
+                    ].map(({ text, owner }, index) => {
                       const isChecked = decisions[index];
                       return (
                         <label 
                           key={index} 
-                          className={`flex items-center gap-4 p-5 border-2 rounded-xl cursor-pointer transition-all group shadow-sm ${isChecked ? 'border-blue-500 bg-blue-50/50' : 'border-slate-100 hover:border-blue-200 hover:bg-slate-50'}`}
+                          className={`flex items-center gap-4 p-5 border-2 rounded-xl cursor-pointer transition-all group shadow-sm ${isChecked ? 'border-[#1C3E57] bg-blue-50/50' : 'border-slate-100 hover:border-blue-200 hover:bg-slate-50'}`}
                         >
                           <div className="flex-shrink-0">
-                            <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${isChecked ? 'border-blue-600 bg-blue-600' : 'border-slate-300 group-hover:border-blue-400'}`}>
+                            <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${isChecked ? 'border-[#1C3E57] bg-[#1C3E57]' : 'border-slate-300 group-hover:border-blue-400'}`}>
                               <CheckCircle size={16} className={`text-white transition-all duration-300 ${isChecked ? 'opacity-100 scale-100' : 'opacity-0 scale-50 group-hover:opacity-50 group-hover:scale-100 group-hover:text-blue-400'}`} />
                             </div>
                           </div>
@@ -588,35 +811,55 @@ const App = () => {
                             onChange={() => toggleDecision(index)}
                             aria-label={text}
                           />
-                          <span className={`font-semibold transition-colors ${isChecked ? 'text-blue-900' : 'text-slate-700 group-hover:text-slate-900'}`}>{text}</span>
+                          <div className="flex-1">
+                            <span className={`font-semibold transition-colors block ${isChecked ? 'text-blue-900 line-through opacity-70' : 'text-slate-700 group-hover:text-slate-900'}`}>{text}</span>
+                            <span className="text-[11px] text-slate-400 mt-0.5 block">Owner: {owner}</span>
+                          </div>
                         </label>
                       );
                     })}
                   </div>
 
                   {/* Progress Tracker */}
-                  <div className="mt-8 p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between max-w-3xl shadow-sm">
-                    <span className="text-sm font-semibold text-slate-600">Approval Progress</span>
-                    <span className="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">
-                      {Object.values(decisions).filter(Boolean).length} of 5 Complete
-                    </span>
+                  <div className="mt-8 max-w-3xl">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-semibold text-slate-600">Approval Progress</span>
+                      <span className="text-sm font-bold text-[#1C3E57] bg-blue-100 px-3 py-1 rounded-full">
+                        {Object.values(decisions).filter(Boolean).length} of 5 Complete
+                      </span>
+                    </div>
+                    <div className="bg-slate-100 rounded-full h-2 overflow-hidden">
+                      <div 
+                        className="bg-[#1C3E57] h-full rounded-full transition-all duration-500"
+                        style={{ width: `${(Object.values(decisions).filter(Boolean).length / 5) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
                   </div>
                 </div>
               )}
 
               {/* Final Recommendation */}
               {activeTab === 'recommendation' && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="bg-slate-50 border-b border-slate-200 px-8 py-3 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="font-semibold text-slate-400">SF DPH</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-slate-400">HHVC Audit</span>
+                    <ChevronRight size={12} className="text-slate-300"/>
+                    <span className="font-semibold text-[#1C3E57]">Final Recommendation</span>
+                  </div>
+                  <div className="p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <Flag className="text-emerald-600" size={28} />
                     <h2 className="text-2xl font-black text-slate-800">Final Recommendation</h2>
                   </div>
 
-                  <div className="bg-emerald-50 border-l-4 border-emerald-500 p-6 md:p-8 rounded-r-xl mb-10 shadow-sm">
-                    <p className="text-emerald-900 leading-relaxed text-lg mb-4">
-                      The audit supports a <strong>consolidation strategy</strong> anchored by a repeatable public service page model. The proposed rodent redesign should be adopted as the gold standard for future Healthy Housing and Vector Control content because it demonstrates the correct balance of plain language, action sequencing, inspection transparency, and practical prevention guidance.
+                  <div className="bg-[#1C3E57] border-l-4 border-emerald-400 p-6 md:p-8 rounded-r-xl mb-10 shadow-md">
+                    <p className="text-white leading-relaxed text-lg mb-4">
+                      The audit supports a <strong className="text-emerald-300">consolidation strategy</strong> anchored by a repeatable public service page model. The proposed rodent redesign should be adopted as the gold standard for future Healthy Housing and Vector Control content because it demonstrates the correct balance of plain language, action sequencing, inspection transparency, and practical prevention guidance.
                     </p>
-                    <p className="text-emerald-800 leading-relaxed">
+                    <p className="text-blue-200 leading-relaxed">
                       A smaller task-based architecture, paired with a curated document library and consistent editorial standards, will improve usability for residents and create a more maintainable long-term content system for the program.
                     </p>
                   </div>
@@ -627,9 +870,9 @@ const App = () => {
                   <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-10">
                     <table className="w-full text-left border-collapse">
                       <thead>
-                        <tr className="bg-slate-100 border-b border-slate-200">
-                          <th className="p-4 font-bold text-sm text-slate-800 w-1/3">Section</th>
-                          <th className="p-4 font-bold text-sm text-slate-800">Purpose</th>
+                        <tr className="bg-[#1C3E57] border-b border-slate-200">
+                          <th className="p-4 font-bold text-sm text-white w-1/3">Section</th>
+                          <th className="p-4 font-bold text-sm text-white">Purpose</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
@@ -643,7 +886,10 @@ const App = () => {
                           { sec: "7. Contacts and links", desc: "Official phone, 3-1-1, forms, and related pages" }
                         ].map((row, i) => (
                           <tr key={i} className="hover:bg-slate-50 transition-colors">
-                            <td className="p-4 text-sm font-bold text-slate-700">{row.sec}</td>
+                            <td className="p-4 text-sm font-bold text-slate-700 flex items-center gap-2">
+                              <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black flex items-center justify-center flex-shrink-0">{i+1}</span>
+                              {row.sec.replace(/^\d+\. /, '')}
+                            </td>
                             <td className="p-4 text-sm text-slate-600">{row.desc}</td>
                           </tr>
                         ))}
@@ -652,7 +898,8 @@ const App = () => {
                   </div>
 
                   <div className="text-xs text-slate-500 border-t border-slate-200 pt-6">
-                    <strong>Internal reference basis for this document:</strong> SF.gov Healthy Housing & Vector Control — Content Audit and Consolidation Report (v2), proposed rodent redesign text, and Karl SF.gov editorial model.
+                    <strong>Reference basis:</strong> SF.gov Healthy Housing &amp; Vector Control — Content Audit and Consolidation Report (v2), proposed rodent redesign text, and Karl SF.gov editorial model.
+                  </div>
                   </div>
                 </div>
               )}
@@ -662,9 +909,9 @@ const App = () => {
             <div className="mt-6 flex items-start gap-3 p-5 bg-amber-50 rounded-xl border border-amber-200 shadow-sm">
               <Info className="text-amber-600 flex-shrink-0 mt-0.5" size={20}/>
               <div>
-                <h4 className="text-sm font-bold text-amber-900 mb-1">Standard Page Template Sequence</h4>
+                <h4 className="text-sm font-bold text-amber-900 mb-1">Karl Standard Page Template Sequence</h4>
                 <p className="text-sm text-amber-800 leading-relaxed">
-                  Every page must follow the sequence: <strong>Title → Problem → Action → Signs → Fix/Prevent → Responsibilities → Reporting.</strong> Do not mix service intake, regulatory explanation, and document dumping.
+                  Every page must follow: <strong>Title → Problem → Action → Signs → Fix/Prevent → Responsibilities → Reporting.</strong> Do not mix service intake, regulatory explanation, and document dumping on the same page.
                 </p>
               </div>
             </div>
@@ -672,15 +919,30 @@ const App = () => {
         </div>
       </main>
 
-      <footer className="bg-slate-900 text-slate-400 py-12 mt-12 border-t-4 border-blue-600">
-        <div className="max-w-6xl mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-8">
-          <div>
-            <h3 className="text-white font-bold mb-1 tracking-tight">San Francisco Department of Public Health</h3>
-            <p className="text-sm">Healthy Housing & Vector Control Content Audit</p>
+      <footer className="bg-[#1C3E57] text-slate-300 py-12 mt-12 border-t-4 border-blue-400">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <svg className="w-5 h-5 opacity-70" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="white" strokeWidth="1.5"/><circle cx="20" cy="20" r="3" fill="white"/></svg>
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">SF.gov</span>
+              </div>
+              <h3 className="text-white font-bold mb-1 tracking-tight text-lg">San Francisco Department of Public Health</h3>
+              <p className="text-sm text-slate-400">Healthy Housing &amp; Vector Control · Content Audit &amp; Consolidation Report</p>
+              <p className="text-xs text-slate-500 mt-1">Final Draft · April 3, 2026 · Prepared by David Arrizon</p>
+            </div>
+            <div className="flex gap-3">
+              <button className="text-sm font-medium border border-slate-500 px-5 py-2.5 rounded-lg hover:text-white hover:border-slate-300 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1C3E57]">Download Full PDF</button>
+              <button className="text-sm font-medium bg-blue-500 text-white px-5 py-2.5 rounded-lg hover:bg-blue-400 hover:shadow-lg hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1C3E57]">Share Report</button>
+            </div>
           </div>
-          <div className="flex gap-4">
-            <button className="text-sm font-medium border border-slate-600 px-5 py-2.5 rounded-lg hover:text-white hover:border-slate-400 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Download Full PDF</button>
-            <button className="text-sm font-medium bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-500 hover:shadow-lg hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Share Report</button>
+          <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row gap-4 items-center justify-between text-xs text-slate-500">
+            <span>© 2026 City and County of San Francisco</span>
+            <div className="flex gap-4">
+              <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-slate-300 transition-colors">Accessibility</a>
+              <a href="#" className="hover:text-slate-300 transition-colors">Language Access</a>
+            </div>
           </div>
         </div>
       </footer>
