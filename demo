@@ -1,0 +1,691 @@
+import React, { useState } from 'react';
+import { 
+  BarChart, 
+  CheckCircle, 
+  Layout, 
+  Search, 
+  AlertCircle, 
+  ArrowRight, 
+  FileText, 
+  Users, 
+  ClipboardCheck, 
+  Map, 
+  Info,
+  Smartphone,
+  Monitor,
+  ArrowDown,
+  GitMerge,
+  ShieldAlert,
+  Home,
+  FileCheck,
+  BookOpen,
+  Flag
+} from 'lucide-react';
+
+const App = () => {
+  const [activeTab, setActiveTab] = useState('executive');
+  const [mockupView, setMockupView] = useState('desktop');
+  const [decisions, setDecisions] = useState({});
+
+  const toggleDecision = (index) => {
+    setDecisions(prev => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  const AuditFinding = ({ title, description }) => (
+    <div className="flex gap-4 p-4 bg-white rounded-lg shadow-sm border border-slate-100 transition-all hover:shadow-md">
+      <div className="flex-shrink-0 w-10 h-10 bg-red-50 text-red-600 rounded-full flex items-center justify-center">
+        <AlertCircle size={20} />
+      </div>
+      <div>
+        <h4 className="font-bold text-slate-800">{title}</h4>
+        <p className="text-slate-600 text-sm">{description}</p>
+      </div>
+    </div>
+  );
+
+  const RoadmapPhase = ({ phase, title, timing, tasks }) => (
+    <div className="relative pl-8 pb-8 border-l-2 border-blue-200 last:pb-0 last:border-l-0">
+      <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-600 border-4 border-white shadow-sm"></div>
+      <div className="flex justify-between items-start mb-2">
+        <h4 className="font-bold text-slate-800 uppercase tracking-wider text-xs">Phase {phase}: {title}</h4>
+        <span className="text-blue-700 bg-blue-50 px-2 py-0.5 rounded text-xs font-semibold border border-blue-100">{timing}</span>
+      </div>
+      <p className="text-slate-600 text-sm mb-2">{tasks}</p>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100">
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="bg-blue-600 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Final Draft</span>
+              <span className="text-slate-400 text-xs font-medium">April 3, 2026</span>
+            </div>
+            <h1 className="text-xl font-black text-slate-800 tracking-tight">Healthy Housing & Vector Control</h1>
+            <p className="text-sm text-slate-500 font-medium">Content Audit and Consolidation Report</p>
+          </div>
+          <div className="text-right hidden md:block">
+            <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Prepared by</p>
+            <p className="text-sm font-bold text-slate-700">David Arrizon</p>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-6 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          
+          {/* Sidebar Nav */}
+          <nav 
+            className="lg:col-span-3 flex overflow-x-auto lg:flex-col gap-2 pb-4 lg:pb-0 scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            role="tablist"
+            aria-label="Report Sections"
+          >
+            {[
+              { id: 'executive', label: 'Executive Summary', icon: <FileText size={18}/> },
+              { id: 'diagnosis', label: 'Content Diagnosis', icon: <Search size={18}/> },
+              { id: 'gold-standard', label: 'Gold Standard Model', icon: <CheckCircle size={18}/> },
+              { id: 'architecture', label: 'Target Architecture', icon: <Layout size={18}/> },
+              { id: 'standards', label: 'Karl Editorial Standards', icon: <BookOpen size={18}/> },
+              { id: 'roadmap', label: 'Implementation Plan', icon: <Map size={18}/> },
+              { id: 'decisions', label: 'Decision Points', icon: <ClipboardCheck size={18}/> },
+              { id: 'recommendation', label: 'Final Recommendation', icon: <Flag size={18}/> },
+            ].map((item) => (
+              <button
+                key={item.id}
+                role="tab"
+                aria-selected={activeTab === item.id}
+                onClick={() => setActiveTab(item.id)}
+                className={`flex-shrink-0 w-auto lg:w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                  activeTab === item.id 
+                    ? 'bg-blue-600 text-white shadow-md lg:transform lg:scale-[1.02]' 
+                    : 'text-slate-600 bg-white lg:bg-transparent hover:bg-white hover:text-blue-600 shadow-sm lg:shadow-none border border-slate-200 lg:border-transparent'
+                }`}
+              >
+                {item.icon}
+                <span className="whitespace-nowrap">{item.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          {/* Main Content Area */}
+          <div className="lg:col-span-9">
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+              
+              {/* Executive Summary */}
+              {activeTab === 'executive' && (
+                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <h2 className="text-2xl font-black text-slate-800 mb-6">Executive Summary</h2>
+                  <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg mb-8">
+                    <p className="text-blue-900 leading-relaxed italic text-lg">
+                      "The current HHVC web content is strong in subject matter depth but weak in structure, navigation, and task completion. We will consolidate around a smaller, clearer page set using the rodent redesign as our gold standard."
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <h3 className="font-bold text-slate-800 border-b pb-2 flex items-center gap-2">
+                        <AlertCircle className="text-amber-500" size={18} /> Primary Diagnosis
+                      </h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        Content is fragmented across overlapping pages, creating decision friction for residents and property owners. The topic hub reflects internal program categories more than public needs.
+                      </p>
+                    </div>
+                    <div className="space-y-4">
+                      <h3 className="font-bold text-slate-800 border-b pb-2 flex items-center gap-2">
+                        <CheckCircle className="text-emerald-500" size={18} /> Strategic Goal
+                      </h3>
+                      <p className="text-slate-600 text-sm leading-relaxed">
+                        Adopt a resident-centered service sequence: recognize the problem, report it, understand the inspection process, and learn how to fix or prevent issues.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Content Diagnosis */}
+              {activeTab === 'diagnosis' && (
+                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <h2 className="text-2xl font-black text-slate-800 mb-6">Audit Findings & Current State</h2>
+                  
+                  {/* Visual Diagram: Before vs After */}
+                  <div className="mb-10 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                    <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-6 text-center">Structural Analysis Diagram</h3>
+                    
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+                      {/* Current State */}
+                      <div className="flex-1 w-full bg-white p-4 rounded-lg border-2 border-red-100 shadow-sm relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-red-400"></div>
+                        <h4 className="font-bold text-red-800 text-center mb-6 text-sm">Current State (Fragmented)</h4>
+                        
+                        <div className="relative h-48 flex justify-center items-center border border-dashed border-red-200 bg-red-50/30 rounded">
+                           {/* Messy Nodes */}
+                           <div className="absolute top-4 left-4 bg-white border border-slate-200 shadow-sm p-2 text-[10px] rounded font-medium text-slate-600 z-10">Vector Control Hub</div>
+                           <div className="absolute top-10 right-4 bg-white border border-slate-200 shadow-sm p-2 text-[10px] rounded font-medium text-slate-600 z-10">Report a Rat</div>
+                           <div className="absolute bottom-6 left-8 bg-white border border-slate-200 shadow-sm p-2 text-[10px] rounded font-medium text-slate-600 z-10">Housing Codes</div>
+                           <div className="absolute bottom-16 right-10 bg-white border border-slate-200 shadow-sm p-2 text-[10px] rounded font-medium text-slate-600 z-10">Pest Prevention PDFs</div>
+                           <div className="absolute top-24 left-24 bg-white border border-slate-200 shadow-sm p-2 text-[10px] rounded font-medium text-slate-600 z-10">Inspection Forms</div>
+                           
+                           {/* Messy Lines connecting them */}
+                           <svg className="absolute inset-0 w-full h-full text-red-200 z-0" pointerEvents="none">
+                             <path d="M 50,30 Q 120,60 180,40" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4"/>
+                             <path d="M 50,150 Q 150,100 200,120" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4"/>
+                             <path d="M 120,100 L 180,40" fill="none" stroke="currentColor" strokeWidth="2"/>
+                             <path d="M 80,140 L 50,30" fill="none" stroke="currentColor" strokeWidth="2"/>
+                           </svg>
+                        </div>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="flex flex-col items-center justify-center text-slate-400">
+                        <ArrowRight size={32} className="hidden md:block" />
+                        <ArrowDown size={32} className="md:hidden" />
+                        <span className="text-[10px] font-bold uppercase mt-1">Consolidation</span>
+                      </div>
+
+                      {/* Future State */}
+                      <div className="flex-1 w-full bg-white p-4 rounded-lg border-2 border-emerald-100 shadow-sm relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-emerald-400"></div>
+                        <h4 className="font-bold text-emerald-800 text-center mb-6 text-sm">Target State (Task-Based)</h4>
+                        
+                        <div className="relative h-48 flex flex-col items-center justify-start pt-4 gap-4 border border-dashed border-emerald-200 bg-emerald-50/30 rounded">
+                           {/* Central Hub */}
+                           <div className="bg-emerald-600 text-white shadow-sm px-4 py-2 text-xs rounded-full font-bold z-10">HHVC Topic Hub</div>
+                           
+                           {/* Branching */}
+                           <div className="w-px h-6 bg-emerald-300"></div>
+                           <div className="w-3/4 h-px bg-emerald-300"></div>
+                           
+                           <div className="flex w-full justify-around px-2 relative z-10 -mt-[1px]">
+                             <div className="w-px h-4 bg-emerald-300"></div>
+                             <div className="w-px h-4 bg-emerald-300"></div>
+                             <div className="w-px h-4 bg-emerald-300"></div>
+                           </div>
+
+                           <div className="flex w-full justify-around px-1 z-10 gap-2">
+                             <div className="bg-white border border-emerald-200 shadow-sm p-2 text-[10px] rounded font-medium text-slate-700 text-center w-full">Report Issue</div>
+                             <div className="bg-white border border-emerald-200 shadow-sm p-2 text-[10px] rounded font-medium text-slate-700 text-center w-full">Fix / Prevent</div>
+                             <div className="bg-white border border-emerald-200 shadow-sm p-2 text-[10px] rounded font-medium text-slate-700 text-center w-full">Resources</div>
+                           </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-4">
+                    <AuditFinding 
+                      title="Fragmented Content" 
+                      description="Users are stranded across overlapping pages, making it difficult to report problems or locate documents." 
+                    />
+                    <AuditFinding 
+                      title="Internal Logic Over Public Needs" 
+                      description="Current structure reflects program categories (Vector Control, etc.) rather than user tasks (Reporting, Fixing, Prevention)." 
+                    />
+                    <AuditFinding 
+                      title="Document Library Friction" 
+                      description="Valuable multilingual materials lack summaries and distinction between current and archival versions." 
+                    />
+                    <AuditFinding 
+                      title="Information Thinness" 
+                      description="The inspection page doesn't set expectations about scope, process, or legal outcomes." 
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Gold Standard Model */}
+              {activeTab === 'gold-standard' && (
+                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                    <div>
+                      <h2 className="text-2xl font-black text-slate-800">The "Gold Standard" Mockup</h2>
+                      <p className="text-slate-500 text-sm">Applying the proposed resident-centered page structure</p>
+                    </div>
+                    <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg">
+                      <button 
+                        onClick={() => setMockupView('mobile')}
+                        className={`p-2 rounded ${mockupView === 'mobile' ? 'bg-white shadow text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                        title="Mobile View"
+                      >
+                        <Smartphone size={18} />
+                      </button>
+                      <button 
+                        onClick={() => setMockupView('desktop')}
+                        className={`p-2 rounded ${mockupView === 'desktop' ? 'bg-white shadow text-blue-600' : 'text-slate-500 hover:text-slate-700'}`}
+                        title="Desktop View"
+                      >
+                        <Monitor size={18} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Browser Window Mockup */}
+                  <div className={`bg-slate-200 border border-slate-300 rounded-xl overflow-hidden shadow-2xl mx-auto transition-all duration-300 ${mockupView === 'mobile' ? 'max-w-[375px]' : 'w-full'}`}>
+                    
+                    {/* Browser Chrome */}
+                    <div className="bg-slate-200 border-b border-slate-300 px-4 py-3 flex items-center gap-2">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-slate-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-slate-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-slate-400"></div>
+                      </div>
+                      <div className="mx-auto bg-white border border-slate-300 rounded-md text-[10px] text-slate-500 px-24 py-1.5 font-mono flex items-center gap-2 shadow-sm">
+                        <ShieldAlert size={10} /> sf.gov/report-rodents
+                      </div>
+                    </div>
+
+                    {/* SF.gov Style Header */}
+                    <div className="bg-[#1C3E57] text-white p-4 md:px-8 flex flex-col md:flex-row md:items-center justify-between border-b-4 border-blue-400">
+                      <div className="flex items-center gap-3 mb-2 md:mb-0">
+                        <div className="font-black text-2xl tracking-tighter">SF.gov</div>
+                      </div>
+                      <div className="text-sm font-medium text-slate-200">City and County of San Francisco</div>
+                    </div>
+
+                    {/* Page Content Wireframe - Karl Principles Applied */}
+                    <div className="bg-white">
+                      <div className="max-w-3xl mx-auto px-6 py-8 md:py-12 space-y-10">
+                        
+                        {/* Section 1: Title + Problem (Start with people) */}
+                        <div className="relative group">
+                          <div className="absolute -left-16 top-2 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Plain Language</div>
+                          <p className="text-sm font-bold text-slate-500 mb-2 uppercase tracking-wide">Department of Public Health</p>
+                          <h1 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight leading-tight">Report rodents or fix a rodent problem</h1>
+                          <p className="text-xl text-slate-700 leading-relaxed">
+                            Rodents can damage your home and spread disease. Act early to prevent a larger problem.
+                          </p>
+                        </div>
+
+                        {/* Section 2: What to do now (Task-first structure) */}
+                        <div className="bg-slate-50 border-t-4 border-blue-600 p-6 md:p-8 relative group rounded-b-lg">
+                           <div className="absolute -left-16 top-2 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Task-First</div>
+                           <h2 className="font-bold text-2xl text-slate-900 mb-5">What you can do now</h2>
+                           <div className="flex flex-col gap-4 max-w-md">
+                             <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 px-6 rounded text-left flex justify-between items-center transition-colors shadow-sm text-lg">
+                               <span>Report a rodent problem</span> <ArrowRight size={20}/>
+                             </button>
+                             <button className="bg-white border-2 border-blue-600 hover:bg-blue-50 text-blue-700 font-bold py-3 px-6 rounded text-left transition-colors text-lg text-center">
+                               Request an inspection
+                             </button>
+                           </div>
+                        </div>
+
+                        {/* Middle: Practical Guidance (Progressive disclosure & Scannable layout) */}
+                        <div className="space-y-10">
+                          
+                          {/* Section 3: Signs */}
+                          <div className="relative group border-b border-slate-200 pb-10">
+                            <div className="absolute -left-16 top-2 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">3-5 Bullets Max</div>
+                            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-5">Signs of rodents</h2>
+                            <ul className="list-disc pl-6 space-y-3 text-slate-700 text-lg marker:text-blue-600">
+                              <li className="pl-2">Droppings near food or walls</li>
+                              <li className="pl-2">Chewed food packages or containers</li>
+                              <li className="pl-2">Holes or burrows in soil</li>
+                            </ul>
+                          </div>
+
+                          {/* Section 4: Fix/Prevent */}
+                          <div className="relative group border-b border-slate-200 pb-10">
+                            <div className="absolute -left-16 top-2 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">No "Please"</div>
+                            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-5">How to fix a rodent problem</h2>
+                            <ol className="list-decimal pl-6 space-y-4 text-slate-700 text-lg marker:text-blue-600 marker:font-bold">
+                              <li className="pl-2"><strong>Remove food sources:</strong> Keep trash in closed bins and clean up pet food.</li>
+                              <li className="pl-2"><strong>Seal gaps:</strong> Seal holes larger than 1/4 inch with durable materials.</li>
+                              <li className="pl-2"><strong>Place traps:</strong> Put traps along walls where rodents travel.</li>
+                            </ol>
+                          </div>
+
+                          {/* Section 5: Responsibilities */}
+                          <div className="relative group pb-6">
+                            <div className="absolute -left-16 top-2 bg-slate-800 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Prog. Disclosure</div>
+                            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Responsibilities</h2>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                              <div>
+                                <h3 className="font-bold text-xl text-slate-900 mb-3 border-b-2 border-slate-800 pb-2 inline-block">Property owners</h3>
+                                <ul className="list-disc pl-5 space-y-2 text-slate-700 marker:text-slate-400">
+                                  <li>Maintain buildings</li>
+                                  <li>Provide proper trash storage</li>
+                                  <li>Seal structural openings</li>
+                                </ul>
+                              </div>
+                              <div>
+                                <h3 className="font-bold text-xl text-slate-900 mb-3 border-b-2 border-slate-800 pb-2 inline-block">Tenants</h3>
+                                <ul className="list-disc pl-5 space-y-2 text-slate-700 marker:text-slate-400">
+                                  <li>Keep units clean</li>
+                                  <li>Store food properly</li>
+                                  <li>Report problems early</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-center text-xs text-slate-500 mt-6 italic">Hover over sections to see Karl editorial principles applied (Plain language, Task-first, Max bullets, etc.)</p>
+                </div>
+              )}
+
+              {/* Architecture */}
+              {activeTab === 'architecture' && (
+                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <h2 className="text-2xl font-black text-slate-800 mb-2">Target Architecture Flow</h2>
+                  <p className="text-slate-600 mb-8">Consolidating from a fragmented set to 5 primary task-based pages.</p>
+                  
+                  {/* Visual Sitemap Tree */}
+                  <div className="mb-10 p-6 bg-slate-50 border border-slate-200 rounded-xl overflow-x-auto">
+                    <div className="min-w-[700px]">
+                      {/* Level 1: Topic Hub */}
+                      <div className="flex justify-center mb-6">
+                        <div className="bg-slate-800 text-white w-64 p-4 rounded-xl shadow-md text-center relative border-b-4 border-blue-500">
+                          <h4 className="font-bold text-lg">Healthy Housing Topic Hub</h4>
+                          <p className="text-xs text-slate-300 mt-1">Lightweight routing navigation</p>
+                          {/* Connector Line Down */}
+                          <div className="absolute -bottom-6 left-1/2 w-px h-6 bg-slate-300"></div>
+                        </div>
+                      </div>
+
+                      {/* Horizontal Connector Line */}
+                      <div className="flex justify-center">
+                        <div className="w-[85%] h-px bg-slate-300 relative">
+                          <div className="absolute left-0 -top-1 w-2 h-2 rounded-full bg-slate-300"></div>
+                          <div className="absolute left-1/3 -top-1 w-2 h-2 rounded-full bg-slate-300 transform -translate-x-1/2"></div>
+                          <div className="absolute right-1/3 -top-1 w-2 h-2 rounded-full bg-slate-300 transform translate-x-1/2"></div>
+                          <div className="absolute right-0 -top-1 w-2 h-2 rounded-full bg-slate-300"></div>
+                        </div>
+                      </div>
+
+                      {/* Level 2: Core Pages */}
+                      <div className="flex justify-between mt-6 gap-4">
+                        
+                        {/* Box 1 */}
+                        <div className="flex-1 bg-white border border-slate-200 p-4 rounded-xl shadow-sm relative pt-6 hover:border-blue-300 transition-colors">
+                          <div className="absolute -top-6 left-1/2 w-px h-6 bg-slate-300"></div>
+                          <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-100 text-blue-600 p-1.5 rounded-full"><AlertCircle size={14}/></div>
+                          <h5 className="font-bold text-sm text-slate-800 mb-2 leading-tight">Report a Housing Health Problem</h5>
+                          <p className="text-[11px] text-slate-500 mb-3">Single reporting entry point for all hazards.</p>
+                          <div className="flex items-center gap-1 text-[10px] text-blue-700 bg-blue-50 px-2 py-1 rounded inline-flex">
+                            <Users size={10}/> Residents, Public
+                          </div>
+                        </div>
+
+                        {/* Box 2 */}
+                        <div className="flex-1 bg-white border border-slate-200 p-4 rounded-xl shadow-sm relative pt-6 hover:border-blue-300 transition-colors">
+                          <div className="absolute -top-6 left-1/2 w-px h-6 bg-slate-300"></div>
+                          <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-100 text-blue-600 p-1.5 rounded-full"><ShieldAlert size={14}/></div>
+                          <h5 className="font-bold text-sm text-slate-800 mb-2 leading-tight">Prevent & Fix Vermin Problems</h5>
+                          <p className="text-[11px] text-slate-500 mb-3">Master guidance based on the rodent page structure.</p>
+                          <div className="flex items-center gap-1 text-[10px] text-blue-700 bg-blue-50 px-2 py-1 rounded inline-flex">
+                            <Users size={10}/> Owners, Tenants
+                          </div>
+                        </div>
+
+                        {/* Box 3 */}
+                        <div className="flex-1 bg-white border border-slate-200 p-4 rounded-xl shadow-sm relative pt-6 hover:border-blue-300 transition-colors">
+                          <div className="absolute -top-6 left-1/2 w-px h-6 bg-slate-300"></div>
+                          <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-100 text-blue-600 p-1.5 rounded-full"><Search size={14}/></div>
+                          <h5 className="font-bold text-sm text-slate-800 mb-2 leading-tight">Understand Housing Inspections</h5>
+                          <p className="text-[11px] text-slate-500 mb-3">Explain scope, violations, and search records.</p>
+                          <div className="flex items-center gap-1 text-[10px] text-blue-700 bg-blue-50 px-2 py-1 rounded inline-flex">
+                            <Users size={10}/> Owners, Operators
+                          </div>
+                        </div>
+
+                        {/* Box 4 */}
+                        <div className="flex-1 bg-white border border-slate-200 p-4 rounded-xl shadow-sm relative pt-6 hover:border-blue-300 transition-colors">
+                          <div className="absolute -top-6 left-1/2 w-px h-6 bg-slate-300"></div>
+                          <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-100 text-blue-600 p-1.5 rounded-full"><FileCheck size={14}/></div>
+                          <h5 className="font-bold text-sm text-slate-800 mb-2 leading-tight">Resource & Document Library</h5>
+                          <p className="text-[11px] text-slate-500 mb-3">Forms, templates, and multilingual materials.</p>
+                          <div className="flex items-center gap-1 text-[10px] text-blue-700 bg-blue-50 px-2 py-1 rounded inline-flex">
+                            <Users size={10}/> All Audiences
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Karl Editorial Standards */}
+              {activeTab === 'standards' && (
+                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="flex items-center gap-3 mb-6">
+                    <BookOpen className="text-blue-600" size={28} />
+                    <div>
+                      <h2 className="text-2xl font-black text-slate-800">Karl (SF.gov) Content Strategy</h2>
+                      <p className="text-slate-500 text-sm">Transforming from information delivery to service delivery.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    {/* Core Principles */}
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-800 mb-4 border-b border-slate-200 pb-2">Core Service Principles</h3>
+                      <ul className="space-y-4">
+                        <li className="flex gap-3">
+                          <CheckCircle size={18} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <strong className="text-sm text-slate-800 block">Start with people & Make it easy</strong>
+                            <p className="text-xs text-slate-600">Begin with what users need to do, not background info. Simplify complex processes.</p>
+                          </div>
+                        </li>
+                        <li className="flex gap-3">
+                          <CheckCircle size={18} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <strong className="text-sm text-slate-800 block">Write in plain language</strong>
+                            <p className="text-xs text-slate-600">Simple, clear, readable text at or below a 5th-grade reading level (8th-grade for specialists).</p>
+                          </div>
+                        </li>
+                        <li className="flex gap-3">
+                          <CheckCircle size={18} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <strong className="text-sm text-slate-800 block">Task-first Structure</strong>
+                            <p className="text-xs text-slate-600">Pages must begin with clear actions (e.g., reporting a problem, requesting a service).</p>
+                          </div>
+                        </li>
+                        <li className="flex gap-3">
+                          <CheckCircle size={18} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                          <div>
+                            <strong className="text-sm text-slate-800 block">Progressive Disclosure</strong>
+                            <p className="text-xs text-slate-600">Top: immediate actions. Middle: practical guidance. Bottom: additional detail.</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Style Guide */}
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-800 mb-4 border-b border-slate-200 pb-2">A-Z Style Guide Rules</h3>
+                      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                        <div className="bg-white p-3 rounded shadow-sm border border-slate-100">
+                          <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-1 block">Tone & Voice</span>
+                          <p className="text-xs text-slate-700">Be direct and authoritative. Do not use "please" for requirements. Never use "Welcome to..."</p>
+                        </div>
+                        <div className="bg-white p-3 rounded shadow-sm border border-slate-100">
+                          <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-1 block">Formatting</span>
+                          <p className="text-xs text-slate-700">Do not use ALL CAPS. Use bulleted lists restricted to 3–5 items max. Always use numbers (1-9 instead of one-nine).</p>
+                        </div>
+                        <div className="bg-white p-3 rounded shadow-sm border border-slate-100">
+                          <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-1 block">Links & Buttons</span>
+                          <p className="text-xs text-slate-700">Link text must describe the destination (never "click here"). Buttons start with verbs.</p>
+                        </div>
+                        <div className="bg-white p-3 rounded shadow-sm border border-slate-100">
+                          <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider mb-1 block">Language Restrictions</span>
+                          <p className="text-xs text-slate-700">Avoid latin abbreviations (i.e., e.g., etc.). Spell out acronyms first. Avoid dashes.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Roadmap */}
+              {activeTab === 'roadmap' && (
+                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <h2 className="text-2xl font-black text-slate-800 mb-8">Implementation Roadmap</h2>
+                  <div className="max-w-2xl bg-white p-2">
+                    <RoadmapPhase 
+                      phase="1" 
+                      title="Stabilize" 
+                      timing="0-30 Days" 
+                      tasks="Fix broken links, inconsistent titles, and duplicate labels. Remove years from resource titles." 
+                    />
+                    <RoadmapPhase 
+                      phase="2" 
+                      title="Rebuild Core" 
+                      timing="30-60 Days" 
+                      tasks="Rewrite vermin pages using the rodent pattern. Expand inspection explainer content." 
+                    />
+                    <RoadmapPhase 
+                      phase="3" 
+                      title="Curate Documents" 
+                      timing="60-90 Days" 
+                      tasks="Audit every file. Add one-sentence summaries, language labels, and 'reviewed' markers." 
+                    />
+                    <RoadmapPhase 
+                      phase="4" 
+                      title="Optimize" 
+                      timing="90+ Days" 
+                      tasks="Refine internal linking and SEO. Align labels to user intent and reduce self-competition." 
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Decision Points */}
+              {activeTab === 'decisions' && (
+                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <h2 className="text-2xl font-black text-slate-800 mb-6">Leadership Decision Points</h2>
+                  <div className="space-y-4 max-w-3xl">
+                    {[
+                      "Approve rodent page structure as the standard for all new guidance.",
+                      "Approve consolidation toward task-based architecture vs. adding pages.",
+                      "Approve content cleanup focused on broken labels and dead ends.",
+                      "Approve development of a 'Reviewed/Current' tagging system for files.",
+                      "Approve expansion of the Inspection Programs page for transparency."
+                    ].map((text, index) => {
+                      const isChecked = decisions[index];
+                      return (
+                        <label 
+                          key={index} 
+                          className={`flex items-center gap-4 p-5 border-2 rounded-xl cursor-pointer transition-all group shadow-sm ${isChecked ? 'border-blue-500 bg-blue-50/50' : 'border-slate-100 hover:border-blue-200 hover:bg-slate-50'}`}
+                        >
+                          <div className="flex-shrink-0">
+                            <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${isChecked ? 'border-blue-600 bg-blue-600' : 'border-slate-300 group-hover:border-blue-400'}`}>
+                              <CheckCircle size={16} className={`text-white transition-all duration-300 ${isChecked ? 'opacity-100 scale-100' : 'opacity-0 scale-50 group-hover:opacity-50 group-hover:scale-100 group-hover:text-blue-400'}`} />
+                            </div>
+                          </div>
+                          <input 
+                            type="checkbox" 
+                            className="sr-only" 
+                            checked={!!isChecked} 
+                            onChange={() => toggleDecision(index)}
+                            aria-label={text}
+                          />
+                          <span className={`font-semibold transition-colors ${isChecked ? 'text-blue-900' : 'text-slate-700 group-hover:text-slate-900'}`}>{text}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+
+                  {/* Progress Tracker */}
+                  <div className="mt-8 p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between max-w-3xl shadow-sm">
+                    <span className="text-sm font-semibold text-slate-600">Approval Progress</span>
+                    <span className="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">
+                      {Object.values(decisions).filter(Boolean).length} of 5 Complete
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Final Recommendation */}
+              {activeTab === 'recommendation' && (
+                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <div className="flex items-center gap-3 mb-6">
+                    <Flag className="text-emerald-600" size={28} />
+                    <h2 className="text-2xl font-black text-slate-800">Final Recommendation</h2>
+                  </div>
+
+                  <div className="bg-emerald-50 border-l-4 border-emerald-500 p-6 md:p-8 rounded-r-xl mb-10 shadow-sm">
+                    <p className="text-emerald-900 leading-relaxed text-lg mb-4">
+                      The audit supports a <strong>consolidation strategy</strong> anchored by a repeatable public service page model. The proposed rodent redesign should be adopted as the gold standard for future Healthy Housing and Vector Control content because it demonstrates the correct balance of plain language, action sequencing, inspection transparency, and practical prevention guidance.
+                    </p>
+                    <p className="text-emerald-800 leading-relaxed">
+                      A smaller task-based architecture, paired with a curated document library and consistent editorial standards, will improve usability for residents and create a more maintainable long-term content system for the program.
+                    </p>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-slate-800 mb-3">Standard Page Template</h3>
+                  <p className="text-slate-600 mb-6 text-sm">All future Healthy Housing pages must follow this sequence to ensure consistent service delivery:</p>
+
+                  <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-10">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-slate-100 border-b border-slate-200">
+                          <th className="p-4 font-bold text-sm text-slate-800 w-1/3">Section</th>
+                          <th className="p-4 font-bold text-sm text-slate-800">Purpose</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {[
+                          { sec: "1. Title + problem statement", desc: "Tell the user exactly what issue this page solves" },
+                          { sec: "2. What you can do now", desc: "Immediate steps in short bullets" },
+                          { sec: "3. Signs or conditions to look for", desc: "Help users confirm they are in the right place" },
+                          { sec: "4. How to prevent or fix the issue", desc: "Practical prevention and correction guidance" },
+                          { sec: "5. Rights and responsibilities", desc: "Clarify owner, tenant, manager, or operator duties" },
+                          { sec: "6. When to report or ask for help", desc: "Clear escalation guidance" },
+                          { sec: "7. Contacts and links", desc: "Official phone, 3-1-1, forms, and related pages" }
+                        ].map((row, i) => (
+                          <tr key={i} className="hover:bg-slate-50 transition-colors">
+                            <td className="p-4 text-sm font-bold text-slate-700">{row.sec}</td>
+                            <td className="p-4 text-sm text-slate-600">{row.desc}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="text-xs text-slate-500 border-t border-slate-200 pt-6">
+                    <strong>Internal reference basis for this document:</strong> SF.gov Healthy Housing & Vector Control — Content Audit and Consolidation Report (v2), proposed rodent redesign text, and Karl SF.gov editorial model.
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Editorial Standard Tip */}
+            <div className="mt-6 flex items-start gap-3 p-5 bg-amber-50 rounded-xl border border-amber-200 shadow-sm">
+              <Info className="text-amber-600 flex-shrink-0 mt-0.5" size={20}/>
+              <div>
+                <h4 className="text-sm font-bold text-amber-900 mb-1">Standard Page Template Sequence</h4>
+                <p className="text-sm text-amber-800 leading-relaxed">
+                  Every page must follow the sequence: <strong>Title → Problem → Action → Signs → Fix/Prevent → Responsibilities → Reporting.</strong> Do not mix service intake, regulatory explanation, and document dumping.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer className="bg-slate-900 text-slate-400 py-12 mt-12 border-t-4 border-blue-600">
+        <div className="max-w-6xl mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-8">
+          <div>
+            <h3 className="text-white font-bold mb-1 tracking-tight">San Francisco Department of Public Health</h3>
+            <p className="text-sm">Healthy Housing & Vector Control Content Audit</p>
+          </div>
+          <div className="flex gap-4">
+            <button className="text-sm font-medium border border-slate-600 px-5 py-2.5 rounded-lg hover:text-white hover:border-slate-400 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Download Full PDF</button>
+            <button className="text-sm font-medium bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-500 hover:shadow-lg hover:-translate-y-0.5 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900">Share Report</button>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
