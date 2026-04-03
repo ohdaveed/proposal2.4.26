@@ -97,7 +97,7 @@ const App = () => {
               <span className="bg-blue-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Final Draft</span>
               <span className="text-slate-400 text-xs font-medium flex items-center gap-1"><Clock size={11}/> April 3, 2026</span>
             </div>
-            <h1 className="text-xl font-black text-slate-800 tracking-tight">Healthy Housing &amp; Vector Control</h1>
+            <h1 className="text-xl font-black text-slate-800 tracking-tight">Healthy Housing & Vector Control</h1>
             <p className="text-sm text-slate-500 font-medium">Content Audit and Consolidation Report · SF DPH</p>
           </div>
           <div className="text-right hidden md:block">
@@ -165,20 +165,20 @@ const App = () => {
 
                   <div className="p-8">
                     <h2 className="text-2xl font-black text-slate-800 mb-2">Executive Summary</h2>
-                    <p className="text-slate-500 text-sm mb-6">Audit scope: sf.gov Healthy Housing &amp; Vector Control web section · April 2026</p>
+                    <p className="text-slate-500 text-sm mb-6">Audit scope: sf.gov Healthy Housing & Vector Control web section · April 2026</p>
                     
                     {/* Key Metrics */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                       {[
-                        { value: '14', label: 'Pages Audited', icon: <FileText size={16}/>, color: 'blue' },
-                        { value: '4', label: 'Critical Findings', icon: <AlertCircle size={16}/>, color: 'red' },
-                        { value: '5', label: 'Target Pages', icon: <TrendingUp size={16}/>, color: 'emerald' },
-                        { value: '4', label: 'Implementation Phases', icon: <Clock size={16}/>, color: 'amber' },
+                        { value: '14', label: 'Pages Audited', icon: <FileText size={16}/>, bg: 'bg-blue-50', border: 'border-blue-100', iconCls: 'text-blue-600', valCls: 'text-blue-700', lblCls: 'text-blue-600' },
+                        { value: '4', label: 'Critical Findings', icon: <AlertCircle size={16}/>, bg: 'bg-red-50', border: 'border-red-100', iconCls: 'text-red-600', valCls: 'text-red-700', lblCls: 'text-red-600' },
+                        { value: '5', label: 'Target Pages', icon: <TrendingUp size={16}/>, bg: 'bg-emerald-50', border: 'border-emerald-100', iconCls: 'text-emerald-600', valCls: 'text-emerald-700', lblCls: 'text-emerald-600' },
+                        { value: '4', label: 'Implementation Phases', icon: <Clock size={16}/>, bg: 'bg-amber-50', border: 'border-amber-100', iconCls: 'text-amber-600', valCls: 'text-amber-700', lblCls: 'text-amber-600' },
                       ].map((stat, i) => (
-                        <div key={i} className={`bg-${stat.color}-50 border border-${stat.color}-100 rounded-xl p-4 flex flex-col items-center text-center`}>
-                          <div className={`text-${stat.color}-600 mb-2`}>{stat.icon}</div>
-                          <div className={`text-3xl font-black text-${stat.color}-700 leading-none`}>{stat.value}</div>
-                          <div className={`text-[11px] font-semibold text-${stat.color}-600 mt-1 leading-tight`}>{stat.label}</div>
+                        <div key={i} className={`${stat.bg} border ${stat.border} rounded-xl p-4 flex flex-col items-center text-center`}>
+                          <div className={`${stat.iconCls} mb-2`}>{stat.icon}</div>
+                          <div className={`text-3xl font-black ${stat.valCls} leading-none`}>{stat.value}</div>
+                          <div className={`text-[11px] font-semibold ${stat.lblCls} mt-1 leading-tight`}>{stat.label}</div>
                         </div>
                       ))}
                     </div>
@@ -221,7 +221,7 @@ const App = () => {
                     <span className="font-semibold text-[#1C3E57]">Content Diagnosis</span>
                   </div>
                   <div className="p-8">
-                  <h2 className="text-2xl font-black text-slate-800 mb-6">Audit Findings &amp; Current State</h2>
+                  <h2 className="text-2xl font-black text-slate-800 mb-6">Audit Findings & Current State</h2>
                   
                   {/* Visual Diagram: Before vs After */}
                   <div className="mb-10 bg-slate-50 p-6 rounded-xl border border-slate-200">
@@ -678,7 +678,7 @@ const App = () => {
                   <div className="mt-8 border border-slate-200 rounded-xl overflow-hidden">
                     <div className="bg-slate-100 border-b border-slate-200 px-5 py-3 flex items-center gap-2">
                       <GitMerge size={16} className="text-slate-600"/>
-                      <span className="text-sm font-bold text-slate-700">Plain Language in Practice: Before &amp; After</span>
+                      <span className="text-sm font-bold text-slate-700">Plain Language in Practice: Before & After</span>
                     </div>
                     <div className="divide-y divide-slate-100">
                       {[
@@ -877,18 +877,18 @@ const App = () => {
                       </thead>
                       <tbody className="divide-y divide-slate-100">
                         {[
-                          { sec: "1. Title + problem statement", desc: "Tell the user exactly what issue this page solves" },
-                          { sec: "2. What you can do now", desc: "Immediate steps in short bullets" },
-                          { sec: "3. Signs or conditions to look for", desc: "Help users confirm they are in the right place" },
-                          { sec: "4. How to prevent or fix the issue", desc: "Practical prevention and correction guidance" },
-                          { sec: "5. Rights and responsibilities", desc: "Clarify owner, tenant, manager, or operator duties" },
-                          { sec: "6. When to report or ask for help", desc: "Clear escalation guidance" },
-                          { sec: "7. Contacts and links", desc: "Official phone, 3-1-1, forms, and related pages" }
+                          { sec: "Title + problem statement", desc: "Tell the user exactly what issue this page solves" },
+                          { sec: "What you can do now", desc: "Immediate steps in short bullets" },
+                          { sec: "Signs or conditions to look for", desc: "Help users confirm they are in the right place" },
+                          { sec: "How to prevent or fix the issue", desc: "Practical prevention and correction guidance" },
+                          { sec: "Rights and responsibilities", desc: "Clarify owner, tenant, manager, or operator duties" },
+                          { sec: "When to report or ask for help", desc: "Clear escalation guidance" },
+                          { sec: "Contacts and links", desc: "Official phone, 3-1-1, forms, and related pages" }
                         ].map((row, i) => (
                           <tr key={i} className="hover:bg-slate-50 transition-colors">
                             <td className="p-4 text-sm font-bold text-slate-700 flex items-center gap-2">
                               <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 text-[10px] font-black flex items-center justify-center flex-shrink-0">{i+1}</span>
-                              {row.sec.replace(/^\d+\. /, '')}
+                              {row.sec}
                             </td>
                             <td className="p-4 text-sm text-slate-600">{row.desc}</td>
                           </tr>
@@ -898,7 +898,7 @@ const App = () => {
                   </div>
 
                   <div className="text-xs text-slate-500 border-t border-slate-200 pt-6">
-                    <strong>Reference basis:</strong> SF.gov Healthy Housing &amp; Vector Control — Content Audit and Consolidation Report (v2), proposed rodent redesign text, and Karl SF.gov editorial model.
+                    <strong>Reference basis:</strong> SF.gov Healthy Housing & Vector Control — Content Audit and Consolidation Report (v2), proposed rodent redesign text, and Karl SF.gov editorial model.
                   </div>
                   </div>
                 </div>
@@ -928,7 +928,7 @@ const App = () => {
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">SF.gov</span>
               </div>
               <h3 className="text-white font-bold mb-1 tracking-tight text-lg">San Francisco Department of Public Health</h3>
-              <p className="text-sm text-slate-400">Healthy Housing &amp; Vector Control · Content Audit &amp; Consolidation Report</p>
+              <p className="text-sm text-slate-400">Healthy Housing & Vector Control · Content Audit & Consolidation Report</p>
               <p className="text-xs text-slate-500 mt-1">Final Draft · April 3, 2026 · Prepared by David Arrizon</p>
             </div>
             <div className="flex gap-3">
